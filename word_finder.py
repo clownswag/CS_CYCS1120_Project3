@@ -10,6 +10,12 @@ class WordFinder:
         self.visited = [[False for _ in range(self.cols)] for _ in range(self.rows)]
 
     def word_on_board(self, word):
+        
+        # Check if a word can be formed on the board. The method works by trying every starting cell
+        # until it finds the first letter of the word, then it if found True it will call the recursive search_word method
+        # to try and find the rest of the word. If the word is found, it returns True and the path taken to form the word.
+        # If the word is not found, it returns False and an empty list.
+        
         word = word.upper()
 
         for row in range(self.rows):
@@ -21,6 +27,7 @@ class WordFinder:
                         return True, path
         return False, []
     
+    # This is a recursive method that we use to search for the word on the board in the function above.
     def search_word(self, row, col, word, index, path):
         if index == len(word):
             return True
@@ -31,6 +38,7 @@ class WordFinder:
         self.visited[row][col] = True
         path.append((row, col))
 
+        # The directions are how we can move on the board.
         directions = [
            #row #col
             (-1, 0),
@@ -39,6 +47,7 @@ class WordFinder:
             (1, 0)
         ]
 
+        # Try all possible directions
         for rowchange, colchange in directions:
             if self.search_word(row + rowchange, col + colchange, word, index + 1, path):
                 return True
@@ -47,6 +56,7 @@ class WordFinder:
         path.pop()
         return False
     
+    # This updates the board if the word is found
     def mark_board(self, word):
         found, path = self.word_on_board(word)
         if found:

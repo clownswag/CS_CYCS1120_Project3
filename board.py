@@ -1,7 +1,7 @@
 import random
 import string
 
-class Boggle_Board:
+class BoggleBoard:
     def __init__(self):
         self.board = [[' ' for _ in range(4)] for _ in range(4)]
         self.visited = [[False for _ in range(4)] for _ in range(4)]
@@ -14,13 +14,13 @@ class Boggle_Board:
             for col in range(4):
                 self.board[row][col] = random.choice(string.ascii_uppercase)
     
-    def display_board(self, found_words=None):
+    def display_board(self, path=None):
         print("+---+---+---+---+")
         for row in range(4):
             print("|", end="")
             for col in range(4):
                 letter = self.board[row][col]
-                if found_words and letter in found_words:
+                if path and (row, col) in path:
                     print(f"<{letter}>", end="|")
                 else:
                     print(f" {letter} ", end="|")

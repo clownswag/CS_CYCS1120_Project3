@@ -15,14 +15,13 @@ class BoggleBoard:
                 self.board[row][col] = random.choice(string.ascii_uppercase)
     
     def display_board(self, path=None):
-        print("+---+---+---+---+")
+        print("+---+ +---+ +---+ +---+")
         for row in range(4):
-            print("|", end="")
             for col in range(4):
                 letter = self.board[row][col]
                 if path and (row, col) in path:
-                    print(f"<{letter}>", end="|")
+                    print(f"|<{letter}>|", end=" ")
                 else:
-                    print(f" {letter} ", end="|")
+                    print(f"| {letter} |", end=" ")
             print()
-            print("+---+---+---+---+")
+            print("+---+ +---+ +---+ +---+")
